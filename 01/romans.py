@@ -1,43 +1,72 @@
-def int_to_roman(num):
-  #encoding: utf-8
-def int_to_roman(num):
-    num = int(input("Digite um valor númerico: "))
+def int_to_roman(num): 
+    roman = ""
     sub = num
     while sub != 0:
-        if sub == 1:
-            sub = sub - 1
-            print("I", end="")
-        elif sub == 4:
+        if sub == 4:
+            roman += "IV"
             sub -= 4
-            print("IV", end="")
-        elif sub < 5:
-            sub = sub - 1
-            print("v", end="")
         elif sub == 9:
+            roman += "IX"
             sub -= 9
-            print("IX", end="")
+        elif sub >= 40 and sub < 50:
+            roman += "XL"
+            sub -= 40
+        elif sub >= 90 and sub < 100:
+            roman += "XC"
+            sub -= 90
+        elif sub >= 400 and sub < 500:
+            roman += "CD"
+            sub -= 400
+        elif sub >= 900 and sub < 1000:
+            roman += "CM"
+            sub -= 900
+        elif sub == 1:
+            roman += "I"
+            sub -= 1
+        elif sub < 5:
+            roman += "I"
+            sub -= 1
         elif sub < 10:
-            sub = sub - 5
-            print("V", end="")
-        elif sub == 40:
-            sub = sub - 40
-            print("XL", end="")
+            roman += "V"
+            sub -= 5
         elif sub < 50:
-            sub = sub - 10
-            print("X", end="")
+            roman += "X"
+            sub -= 10
         elif sub < 100:
-            sub = sub - 50
-            print("L", end="")
+            roman += "L"
+            sub -= 50
         elif sub < 500:
-            sub = sub - 100
-            print("C", end="")
+            roman += "C"
+            sub -= 100
         elif sub < 1000:
-            sub = sub - 500
-            print("D", end="")
+            roman += "D"
+            sub -= 500
+        elif sub >= 1000:
+            roman += "M"
+            sub -= 1000
+    return roman
 
-int_to_roman(0)
-        
+def roman_to_int(roman):
+    roman_values = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+}
 
-def roman_to_int(s):
-    # Implemente sua função aqui
-    pass
+    total = 0
+    prev_value = 0
+
+    for symbol in reversed(roman):
+        value = roman_values[symbol]
+        if value < prev_value:
+            total -= value
+        else:
+            total += value
+        prev_value = value
+
+    return total
+roman_numeral = "MMXVIII"
