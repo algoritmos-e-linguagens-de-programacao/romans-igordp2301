@@ -1,12 +1,9 @@
-# Definir os dias da semana e valores de dias passados e dia atual
-dias_da_semana = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"]
-dias_passados = 5
-dia_atual = "Sab"
-
-def proximo_dia_util(dias_passados, dia_atual):
-    dias_restantes = 30 - dias_passados  # Diferença entre o tempo de renovação após o deposito e a quantos dias foi feito o deposito
-    indice_dia_atual = dias_da_semana.index(dia_atual)  # Puxa o índice da lista em que se encontra o dia atual. Dias_da_semana = nome da lista, .index() puxa na lista o valor que está dendo parentese
-    indice_dia_renovacao = (indice_dia_atual + dias_restantes) % 7  # Calcular o índice do dia da renovação
+def proximo_dia_util(dias_passados, dia_atual):  # Adicionando dias_da_semana como um argumento
+    dias_da_semana = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"]
+    dias_passados = max(dias_passados)
+    dias_restantes = 30 - dias_passados  
+    indice_dia_atual = dias_da_semana.index(dia_atual)  
+    indice_dia_renovacao = (indice_dia_atual + dias_restantes) % 7  
 
     if indice_dia_renovacao == 5:  # Sábado
         dias_restantes += 2
@@ -16,5 +13,4 @@ def proximo_dia_util(dias_passados, dia_atual):
     return dias_restantes
 
 # Calcular o tempo mínimo de renovação
-min_dias_espera = proximo_dia_util(dias_passados, dia_atual)
-print(f"O tempo mínimo de renovação é de {min_dias_espera} dias.")
+print(proximo_dia_util([5, 4, 3, 1, 1], "Sab"))
